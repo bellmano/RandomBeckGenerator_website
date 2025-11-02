@@ -1,7 +1,7 @@
 name: Fetch IMDB Ratings
 on:
   schedule:
-    - cron: '0 2 * * *' # Runs every night at 02:00 UTC
+    - cron: '0 2 * * 1' # Runs every Monday at 02:00 UTC
   workflow_dispatch:
 permissions:
   contents: write
