@@ -1,4 +1,4 @@
-# :cop: :clapper: Random Beck Movie Generator
+# :cop::clapper: Random Beck Movie Generator
 
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=bellmano_randombeck.se&metric=coverage&token=53ebf1e5d8da311d0caa56123822ea9310f670fd)](https://sonarcloud.io/summary/overall?id=bellmano_randombeck.se)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=bellmano_randombeck.se&metric=security_rating&token=53ebf1e5d8da311d0caa56123822ea9310f670fd)](https://sonarcloud.io/summary/overall?id=bellmano_randombeck.se)
