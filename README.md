@@ -26,7 +26,7 @@ To run the tests and view coverage:
 This will execute the tests and generate a coverage report.
 
 ## :gem: Website
-<a href="https://randombeck.se/"><img src="img/example.png"></a>
+<a href="https://randombeck.se/"><img src="img/example.png" width="50%" height="50%"></a>
 
 ## :heart: Acknowledgments
 
