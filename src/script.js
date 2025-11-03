@@ -153,7 +153,12 @@ class BeckMovieGenerator {
     }
 
     getRandomNumber(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
+    // Use crypto.getRandomValues for secure random number generation
+    const range = max - min + 1;
+    const randomBuffer = new Uint32Array(1);
+    window.crypto.getRandomValues(randomBuffer);
+    const randomNumber = randomBuffer[0] / (0xFFFFFFFF + 1);
+    return Math.floor(randomNumber * range) + min;
     }
 
     displayMovie(movie) {
