@@ -1,7 +1,7 @@
 {
-  "name": "randombeck.se",
+  "name": "randombeckgenerator-website",
   "version": "1.0.0",
-  "description": "Random Beck-movie generator",
+  "description": "A website that helps you choose a random Beck movie to watch. Perfect for when you can't decide which Beck film to enjoy!",
   "scripts": {
     "test": "jest",
     "test:coverage": "jest --coverage"
