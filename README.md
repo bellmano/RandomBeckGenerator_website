@@ -12,7 +12,7 @@ A website that helps you choose a random Beck movie to watch. Perfect for when y
 
 ## :scroll: Introduction
 
-Beck is a long-running Swedish film series following detective Martin Beck through decades of classic Scandinavian crime stories. Over the years, it has become somewhat of a cult phenomenon, loved for its mix of crime, dry humor, and iconic characters.
+Beck is a long-running Swedish film series following detective Martin Beck through decades of classic Scandinavian crime stories. Over the years, it has become somewhat of a cult phenomenon, loved for its mix of crime, humor, and iconic characters.
 
 The idea for this project came from the podcast TuttoBalutto, where the hosts jokingly suggested picking a random Beck movie to watch. I decided to make that joke a reality.
 
