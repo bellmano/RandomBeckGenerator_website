@@ -55,8 +55,7 @@ describe('fetchRatings.js', () => {
         number: 1,
         title: "Test Movie",
         year: 2020,
-        imdbUrl: "https://www.imdb.com/title/tt1234567/",
-        posterUrl: "https://example.com/poster.jpg"
+        imdbUrl: "https://www.imdb.com/title/tt1234567/"
     }
 ];`;
 
@@ -145,8 +144,7 @@ describe('fetchRatings.js', () => {
                 year: 2020,
                 description: "desc",
                 imdbUrl: "https://imdb.com/title/tt1/",
-                tv4playUrl: "https://tv4.se/",
-                posterUrl: "https://poster.jpg"
+                tv4playUrl: "https://tv4.se/"
             }];`;
             fs.readFileSync.mockReturnValue(fullMovie);
             const writeFileSpy = jest.fn();
@@ -172,8 +170,7 @@ describe('fetchRatings.js', () => {
                 number: 1,
                 title: "Minimal",
                 year: 2020,
-                imdbUrl: "https://imdb.com/title/tt1/",
-                posterUrl: "https://poster.jpg"
+                imdbUrl: "https://imdb.com/title/tt1/"
             }];`;
             fs.readFileSync.mockReturnValue(minimalMovie);
             const writeFileSpy = jest.fn();
@@ -220,7 +217,7 @@ describe('fetchRatings.js', () => {
             expect(written).toContain('imdbRating: "8.5"');
         });
 
-        test('should format movie with only imdbRating, no posterUrl or runtime', async () => {
+        test('should format movie with only imdbRating, no runtime', async () => {
             const onlyImdbMovie = `const beckMovies = [{
                 number: 1,
                 title: "Only IMDB Movie",
@@ -245,16 +242,15 @@ describe('fetchRatings.js', () => {
             expect(written).not.toContain('runtime:');
         });
 
-        test('should format movie with posterUrl and runtime but no imdbRating', async () => {
-            const posterRuntimeMovie = `const beckMovies = [{
+        test('should format movie with runtime but no imdbRating', async () => {
+            const runtimeOnlyMovie = `const beckMovies = [{
                 number: 1,
-                title: "Poster Runtime Movie",
+                title: "Runtime Only Movie",
                 year: 2020,
                 imdbUrl: "https://imdb.com/title/tt1/",
-                posterUrl: "https://poster.jpg",
                 runtime: "110 min"
             }];`;
-            fs.readFileSync.mockReturnValue(posterRuntimeMovie);
+            fs.readFileSync.mockReturnValue(runtimeOnlyMovie);
             const writeFileSpy = jest.fn();
             fs.writeFileSync.mockImplementation(writeFileSpy);
             fetch.mockResolvedValue({
@@ -268,8 +264,61 @@ describe('fetchRatings.js', () => {
             await new Promise(resolve => setTimeout(resolve, 100));
 
             const written = writeFileSpy.mock.calls[0][1];
-            expect(written).toContain('posterUrl: "https://poster.jpg",');
             expect(written).toContain('runtime: "110 min"');
+            expect(written).not.toContain('imdbRating:');
+        });
+
+        test('should format movie with tv4playUrl and runtime but no imdbRating', async () => {
+            const tv4RuntimeMovie = `const beckMovies = [{
+                number: 1,
+                title: "TV4 Runtime Movie",
+                year: 2020,
+                imdbUrl: "https://imdb.com/title/tt1/",
+                tv4playUrl: "https://tv4.se/",
+                runtime: "95 min"
+            }];`;
+            fs.readFileSync.mockReturnValue(tv4RuntimeMovie);
+            const writeFileSpy = jest.fn();
+            fs.writeFileSync.mockImplementation(writeFileSpy);
+            fetch.mockResolvedValue({
+                text: jest.fn().mockResolvedValue('no rating found')
+            });
+
+            jest.isolateModules(() => {
+                require('../src/fetchRatings.js');
+            });
+
+            await new Promise(resolve => setTimeout(resolve, 100));
+
+            const written = writeFileSpy.mock.calls[0][1];
+            expect(written).toContain('tv4playUrl: "https://tv4.se/",');
+            expect(written).toContain('runtime: "95 min"');
+        });
+
+        test('should format movie with only tv4playUrl, no runtime or imdbRating', async () => {
+            const tv4OnlyMovie = `const beckMovies = [{
+                number: 1,
+                title: "TV4 Only Movie",
+                year: 2020,
+                imdbUrl: "https://imdb.com/title/tt1/",
+                tv4playUrl: "https://tv4.se/"
+            }];`;
+            fs.readFileSync.mockReturnValue(tv4OnlyMovie);
+            const writeFileSpy = jest.fn();
+            fs.writeFileSync.mockImplementation(writeFileSpy);
+            fetch.mockResolvedValue({
+                text: jest.fn().mockResolvedValue('no rating found')
+            });
+
+            jest.isolateModules(() => {
+                require('../src/fetchRatings.js');
+            });
+
+            await new Promise(resolve => setTimeout(resolve, 100));
+
+            const written = writeFileSpy.mock.calls[0][1];
+            expect(written).toContain('tv4playUrl: "https://tv4.se/"');
+            expect(written).not.toContain('runtime:');
             expect(written).not.toContain('imdbRating:');
         });
     });

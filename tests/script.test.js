@@ -1,6 +1,6 @@
 // Mock the beckMovies data before requiring the script
 global.beckMovies = [
-    { number: 1, title: "Beck - Lockpojken", year: 1997, description: "Test movie 1", imdbRating: "6.2", tv4playUrl: "https://tv4play.se/1", posterUrl: "https://poster1.jpg" },
+    { number: 1, title: "Beck - Lockpojken", year: 1997, description: "Test movie 1", imdbRating: "6.2", tv4playUrl: "https://tv4play.se/1" },
     { number: 2, title: "Beck - Monstret", year: 1998, description: "Test movie 2" },
     { number: 3, title: "Beck - Vita nätter", year: 1998, description: "Test movie 3", imdbRating: "5.9" },
     { number: 4, title: "Beck - Öga för öga", year: 1998, description: "Test movie 4" },
@@ -179,7 +179,7 @@ describe('Main Script Tests', () => {
         
         // Check poster set
         const movieImage = document.getElementById('movie-image');
-        expect(movieImage.src).toContain('poster1.jpg');
+        expect(movieImage.src).toContain('img/moviePosters/beck1.png');
     });
 
     test('should display only runtime when no IMDB rating', () => {
